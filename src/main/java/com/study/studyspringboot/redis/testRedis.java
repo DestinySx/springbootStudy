@@ -3,6 +3,7 @@ package com.study.studyspringboot.redis;
 import com.study.studyspringboot.redis.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,9 @@ public class testRedis {
     @Autowired
     private RedisTemplate<Serializable, Object> redisTemplate;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @RequestMapping("/set")
     public String setPOJO(){
 
@@ -31,12 +35,17 @@ public class testRedis {
         user.setNickname("cherish");
         user.setPassword("123456");
         user.setUsername("admin");
+        // 存储序列化对象
         redisTemplate.opsForValue().set("user1", user);
+        // 存储对象
+        stringRedisTemplate.opsForValue().set("user2",user.toString());
         return "存储对象";
     }
 
     @RequestMapping(value = "/get",produces = MediaType.APPLICATION_JSON_VALUE)
     public Object getPOJO(){
+
         return redisTemplate.opsForValue().get("user1");
+        //return stringRedisTemplate.opsForValue().get("user1");
     }
 }
