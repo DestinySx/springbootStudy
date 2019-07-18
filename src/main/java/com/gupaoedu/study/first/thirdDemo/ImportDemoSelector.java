@@ -20,7 +20,8 @@ public class ImportDemoSelector implements ImportSelector {
     public String[] selectImports(AnnotationMetadata annotationMetadata) {
 
         Map<String,Object> attributes = annotationMetadata.getAnnotationAttributes(EnableDefineService.class.getName());
+
         //动态注入逻辑
-        return new String[]{OneService.class.getName(),TwoService.class.getName()};
+        return new String[]{TwoService.class.getName()};
     }
 }

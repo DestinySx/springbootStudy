@@ -3,6 +3,7 @@ package com.gupaoedu.study.first.thirdDemo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,6 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  **/
 @SpringBootApplication
 @EnableDefineService(exclude = TwoService.class)
+@Import(ImportDemoRegistrar.class)
 public class EnableDemoMain {
 
     public static void main(String[] args) {
